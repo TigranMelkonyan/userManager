@@ -79,15 +79,15 @@ public abstract class AbstractController {
 
     public Optional<String> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication == null){
+        if (authentication == null) {
             return Optional.of("UNKNOWN");
         }
-        if ( !authentication.isAuthenticated()) {
+        if (!authentication.isAuthenticated()) {
             throw new NoPermissionException("AUTH ERROR", ErrorCode.NO_PERMISSION);
         }
-        if(authentication.getPrincipal() instanceof String) {
+        if (authentication.getPrincipal() instanceof String) {
             return Optional.of((String) authentication.getPrincipal());
         }
-        return Optional.of(((User)authentication.getPrincipal()).getUsername());
+        return Optional.of(((User) authentication.getPrincipal()).getUsername());
     }
 }
