@@ -1,4 +1,4 @@
-package com.iguan.demo.usermanager.service.user.validator;
+package com.iguan.demo.usermanager.service.validator;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;

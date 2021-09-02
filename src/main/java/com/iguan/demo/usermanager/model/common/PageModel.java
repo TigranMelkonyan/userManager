@@ -1,5 +1,7 @@
 package com.iguan.demo.usermanager.model.common;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,19 +11,19 @@ import java.util.List;
  */
 public class PageModel<T> {
 
-    private final List<T> items;
-    private final Long totalCount;
+    private final List<T> items = new ArrayList<>();
+    private final long totalCount;
 
-    public PageModel(List<T> items, Long totalCount) {
-        this.items = items;
+    public PageModel(List<T> items, long totalCount) {
+        this.items.addAll(items);
         this.totalCount = totalCount;
     }
 
     public List<T> getItems() {
-        return items;
+        return Collections.unmodifiableList(items);
     }
 
-    public Long getTotalCount() {
+    public long getTotalCount() {
         return totalCount;
     }
 }

@@ -1,10 +1,14 @@
 package com.iguan.demo.usermanager.controller;
 
+import com.iguan.demo.usermanager.exceptions.NoPermissionException;
 import com.iguan.demo.usermanager.exceptions.RecordConflictException;
 import com.iguan.demo.usermanager.exceptions.error.ErrorCode;
-import com.iguan.demo.usermanager.model.response.ErrorResponse;
+import com.iguan.demo.usermanager.model.rest.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -70,5 +75,19 @@ public abstract class AbstractController {
 
     private <T> ResponseEntity<T> respond(final T object, final HttpStatus httpStatus) {
         return object == null ? respondEmpty() : new ResponseEntity<>(object, httpStatus);
+    }
+
+    public Optional<String> getCurrentAuditor() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null){
+            return Optional.of("UNKNOWN");
+        }
+        if ( !authentication.isAuthenticated()) {
+            throw new NoPermissionException("AUTH ERROR", ErrorCode.NO_PERMISSION);
+        }
+        if(authentication.getPrincipal() instanceof String) {
+            return Optional.of((String) authentication.getPrincipal());
+        }
+        return Optional.of(((User)authentication.getPrincipal()).getUsername());
     }
 }

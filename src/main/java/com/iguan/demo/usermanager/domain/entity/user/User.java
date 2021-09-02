@@ -29,6 +29,14 @@ public class User extends BaseEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    private String phone;
+
     private boolean active = true;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -37,9 +45,12 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String firstName, String lastName, String phone) {
         this.username = username;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
     }
 
     public boolean isActive() {
@@ -74,6 +85,30 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,6 +122,9 @@ public class User extends BaseEntity {
                 .append(active, user.active)
                 .append(username, user.username)
                 .append(password, user.password)
+                .append(firstName, user.firstName)
+                .append(lastName, user.lastName)
+                .append(phone, user.phone)
                 .append(roles, user.roles)
                 .isEquals();
     }
@@ -97,6 +135,9 @@ public class User extends BaseEntity {
                 .appendSuper(super.hashCode())
                 .append(username)
                 .append(password)
+                .append(firstName)
+                .append(lastName)
+                .append(phone)
                 .append(active)
                 .append(roles)
                 .toHashCode();
@@ -107,6 +148,9 @@ public class User extends BaseEntity {
         return new ToStringBuilder(this)
                 .append("username", username)
                 .append("password", password)
+                .append("firstName", firstName)
+                .append("lastName", lastName)
+                .append("phone", phone)
                 .append("active", active)
                 .append("roles", roles)
                 .toString();

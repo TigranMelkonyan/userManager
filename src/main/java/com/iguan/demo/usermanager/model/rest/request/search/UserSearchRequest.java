@@ -1,5 +1,7 @@
-package com.iguan.demo.usermanager.model.user;
+package com.iguan.demo.usermanager.model.rest.request.search;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.iguan.demo.usermanager.model.user.UserSearchProperties;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -11,19 +13,28 @@ import javax.validation.constraints.Size;
  * Date: 31/08/2021
  * Time: 23:53
  */
-public class UserSearchProperties {
+public class UserSearchRequest {
 
     private String userName;
     private String firstName;
     private String lastName;
-    private Boolean includeHasAdminRole;
-    private Boolean includeInActive;
 
     @Size(min = 0)
     private Integer from = 0;
 
     @Size(min = 1)
     private Integer size = 50;
+
+    @JsonIgnore
+    public UserSearchProperties toUserSearchProperties() {
+        UserSearchProperties userSearchProperties = new UserSearchProperties();
+        userSearchProperties.setUserName(userName);
+        userSearchProperties.setFirstName(firstName);
+        userSearchProperties.setLastName(lastName);
+        userSearchProperties.setFrom(from);
+        userSearchProperties.setSize(size);
+        return userSearchProperties;
+    }
 
     public String getUserName() {
         return userName;
@@ -49,14 +60,6 @@ public class UserSearchProperties {
         this.size = size;
     }
 
-    public Boolean getIncludeInActive() {
-        return includeInActive;
-    }
-
-    public void setIncludeInActive(Boolean includeInActive) {
-        this.includeInActive = includeInActive;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -73,28 +76,18 @@ public class UserSearchProperties {
         this.lastName = lastName;
     }
 
-    public Boolean getIncludeHasAdminRole() {
-        return includeHasAdminRole;
-    }
-
-    public void setIncludeHasAdminRole(Boolean includeHasAdminRole) {
-        this.includeHasAdminRole = includeHasAdminRole;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
 
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserSearchProperties that = (UserSearchProperties) o;
+        UserSearchRequest that = (UserSearchRequest) o;
 
         return new EqualsBuilder()
                 .append(userName, that.userName)
                 .append(firstName, that.firstName)
                 .append(lastName, that.lastName)
-                .append(includeHasAdminRole, that.includeHasAdminRole)
-                .append(includeInActive, that.includeInActive)
                 .append(from, that.from)
                 .append(size, that.size)
                 .isEquals();
@@ -106,8 +99,6 @@ public class UserSearchProperties {
                 .append(userName)
                 .append(firstName)
                 .append(lastName)
-                .append(includeHasAdminRole)
-                .append(includeInActive)
                 .append(from)
                 .append(size)
                 .toHashCode();
@@ -119,8 +110,6 @@ public class UserSearchProperties {
                 .append("userName", userName)
                 .append("firstName", firstName)
                 .append("lastName", lastName)
-                .append("hasAdminRole", includeHasAdminRole)
-                .append("includeInActive", includeInActive)
                 .append("from", from)
                 .append("size", size)
                 .toString();

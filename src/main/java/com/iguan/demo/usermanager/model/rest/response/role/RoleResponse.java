@@ -1,59 +1,54 @@
-package com.iguan.demo.usermanager.domain.entity.role;
+package com.iguan.demo.usermanager.model.rest.response.role;
 
-import com.iguan.demo.usermanager.domain.common.BaseEntity;
+import com.iguan.demo.usermanager.domain.entity.role.Role;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  * Created by Tigran Melkonyan
- * Date: 29/08/2021
- * Time: 17:40
+ * Date: 01/09/2021
+ * Time: 19:57
  */
-@Entity
-@Table
-public class Role extends BaseEntity {
+public class RoleResponse {
 
-    @Column(unique = true)
     private String name;
 
-    public Role() {
+    public RoleResponse() {
     }
 
-    public Role(String name) {
+    public RoleResponse(final String name) {
         this.name = name;
+    }
+
+    public static RoleResponse from(final Role role) {
+        return new RoleResponse(role.getName());
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(final String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
 
-        if (!(o instanceof Role)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        final Role role = (Role) o;
+        RoleResponse that = (RoleResponse) o;
 
         return new EqualsBuilder()
-                .appendSuper(super.equals(o))
-                .append(name, role.name)
+                .append(name, that.name)
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .appendSuper(super.hashCode())
                 .append(name)
                 .toHashCode();
     }
@@ -61,7 +56,6 @@ public class Role extends BaseEntity {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .appendSuper(super.toString())
                 .append("name", name)
                 .toString();
     }

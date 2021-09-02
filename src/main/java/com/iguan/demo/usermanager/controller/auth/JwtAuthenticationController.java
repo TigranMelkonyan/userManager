@@ -4,7 +4,7 @@ import com.iguan.demo.usermanager.config.security.jwt.JwtRequest;
 import com.iguan.demo.usermanager.config.security.jwt.JwtResponse;
 import com.iguan.demo.usermanager.config.security.jwt.JwtTokenUtil;
 import com.iguan.demo.usermanager.config.security.jwt.JwtUserDetailsService;
-import com.iguan.demo.usermanager.model.user.UserRegisterModel;
+import com.iguan.demo.usermanager.model.rest.request.UserCreateRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -39,7 +39,7 @@ public class JwtAuthenticationController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<?> register(@RequestBody @Valid UserRegisterModel singUpRequest) {
+    public ResponseEntity<?> register(@RequestBody @Valid UserCreateRequest singUpRequest) {
         jwtUserDetailsService.register(singUpRequest);
         return ResponseEntity.ok("User successfully registered");
     }

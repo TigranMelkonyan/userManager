@@ -2,11 +2,10 @@ package com.iguan.demo.usermanager.service.user;
 
 import com.iguan.demo.usermanager.domain.entity.user.User;
 import com.iguan.demo.usermanager.model.common.PageModel;
-import com.iguan.demo.usermanager.model.user.UserCreateModel;
+import com.iguan.demo.usermanager.model.rest.request.UserCreateRequest;
+import com.iguan.demo.usermanager.model.rest.response.admin.UserResponse;
 import com.iguan.demo.usermanager.model.user.UserSearchProperties;
-import com.iguan.demo.usermanager.model.user.UserUpdateModel;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import com.iguan.demo.usermanager.model.rest.request.UserUpdateRequest;
 
 import java.util.UUID;
 
@@ -17,23 +16,21 @@ import java.util.UUID;
  */
 public interface UserService {
 
-    User createUser(final UserCreateModel model);
+    UserResponse createUser(final UserCreateRequest model);
 
-    User getUserById(final UUID id);
+    UserResponse getUserById(final UUID id);
 
-    User getByUserName(final String name);
+    UserResponse getByUserName(final String name);
 
-    PageModel<User> search(final UserSearchProperties searchProperties);
+    PageModel<UserResponse> search(final UserSearchProperties searchProperties);
 
-    User updateUser(final UUID id, final UserUpdateModel model);
+    UserResponse updateUser(final UUID id, final UserUpdateRequest model);
 
     void close(final UUID id);
 
-    void checkIfExistsById(final UUID id);
+    UserResponse setActive(final UUID id);
 
-    User setActive(final UUID id);
-
-    User getActiveUserById(final UUID id);
+    UserResponse getActiveUserById(final UUID id);
 
     void delete(final UUID id);
 

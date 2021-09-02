@@ -1,4 +1,4 @@
-package com.iguan.demo.usermanager.model.response;
+package com.iguan.demo.usermanager.model.rest.response;
 
 import com.iguan.demo.usermanager.exceptions.error.ErrorCode;
 
