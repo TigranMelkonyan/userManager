@@ -41,7 +41,7 @@ public class UserResponse {
                 .stream().map(RoleResponse::from)
                 .collect(Collectors.toList());
         return new UserResponse(
-                entity.getId(), entity.getUsername(),entity.getFirstName(),
+                entity.getId(), entity.getUsername(), entity.getFirstName(),
                 entity.getLastName(), entity.getPhone(),
                 entity.isActive(), roles
         );

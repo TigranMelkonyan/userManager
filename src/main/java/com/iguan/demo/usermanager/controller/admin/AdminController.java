@@ -1,13 +1,12 @@
 package com.iguan.demo.usermanager.controller.admin;
 
 import com.iguan.demo.usermanager.controller.AbstractController;
-import com.iguan.demo.usermanager.domain.entity.user.User;
-import com.iguan.demo.usermanager.model.rest.response.common.PageResponse;
-import com.iguan.demo.usermanager.model.rest.response.admin.UserResponse;
 import com.iguan.demo.usermanager.model.common.PageModel;
 import com.iguan.demo.usermanager.model.rest.request.UserCreateRequest;
-import com.iguan.demo.usermanager.model.rest.request.search.AdminUserSearchRequest;
 import com.iguan.demo.usermanager.model.rest.request.UserUpdateRequest;
+import com.iguan.demo.usermanager.model.rest.request.search.AdminUserSearchRequest;
+import com.iguan.demo.usermanager.model.rest.response.admin.UserResponse;
+import com.iguan.demo.usermanager.model.rest.response.common.PageResponse;
 import com.iguan.demo.usermanager.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Validator;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Created by Tigran Melkonyan
@@ -110,7 +108,7 @@ public class AdminController extends AbstractController {
 
     @GetMapping("search")
     @ApiOperation(value = "Search users", response = PageResponse.class)
-    public ResponseEntity<PageResponse> searchOrganizations(
+    public ResponseEntity<PageResponse> searchUsers(
             @RequestHeader("Authorization") final String token,
             final AdminUserSearchRequest searchRequest
     ) {

@@ -1,30 +1,25 @@
 package com.iguan.demo.usermanager.controller.user;
 
 import com.iguan.demo.usermanager.controller.AbstractController;
-import com.iguan.demo.usermanager.domain.entity.user.User;
 import com.iguan.demo.usermanager.exceptions.NoPermissionException;
-import com.iguan.demo.usermanager.exceptions.RecordConflictException;
 import com.iguan.demo.usermanager.exceptions.error.ErrorCode;
-import com.iguan.demo.usermanager.model.rest.response.common.PageResponse;
-import com.iguan.demo.usermanager.model.rest.response.admin.UserResponse;
 import com.iguan.demo.usermanager.model.common.PageModel;
-import com.iguan.demo.usermanager.model.rest.request.search.UserSearchRequest;
 import com.iguan.demo.usermanager.model.rest.request.UserUpdateRequest;
+import com.iguan.demo.usermanager.model.rest.request.search.UserSearchRequest;
+import com.iguan.demo.usermanager.model.rest.response.admin.UserResponse;
+import com.iguan.demo.usermanager.model.rest.response.common.PageResponse;
 import com.iguan.demo.usermanager.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Validator;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Created by Tigran Melkonyan

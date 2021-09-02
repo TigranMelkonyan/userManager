@@ -1,6 +1,5 @@
 package com.iguan.demo.usermanager.model.rest.request;
 
-import com.iguan.demo.usermanager.config.security.password.ValidPassword;
 import com.iguan.demo.usermanager.domain.entity.user.User;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
